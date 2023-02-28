@@ -1,0 +1,70 @@
+{% extends 'admin/base_template.html' %}
+{% load static %}
+{% load get_item %}
+
+{% block title %} Сообщения {% endblock %}
+
+
+{% block page_title %} Сообщения {% endblock %}
+
+
+{% block nav_ol %}
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'home' %}">Главная</a></li>
+    <li class="breadcrumb-item ">
+        <a href="{% url 'messages_list' %}">Сообщения</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="&quot;page&quot;">
+        Информация
+    </li>
+</ol>
+{% endblock %}
+
+{% block content_width %} class="col-12" {% endblock %}
+
+
+{% block content %}
+<form class="row" method="post">
+    {% csrf_token %}
+    {{ some_error }}
+    <div class="col-12 col-xl-8">
+        <div class="card mt-3">
+            <div class="card-bodyb p-5">
+                <div class="form-group">
+                    <!-- Label  -->
+                    <label class="form-label">
+                        Quote
+                    </label>
+                    <br>
+                    <!-- Input -->
+                    <input type="text" {% if object %} value="{{ object.quote }}" {% endif %} name="quote" class="form-control">
+                </div>
+                <div class="form-group">
+                    <!-- Label  -->
+                    <label class="form-label">
+                        Group
+                    </label>
+                    <br>
+                    <!-- Input -->
+                    <select name="group" class="form-select" id="">
+                        {% for gr in groups %}
+                            {% if object and gr == object.gr %}
+                                <option value="{{ gr.id }}" selected>{{ gr.name }}</option>
+                            {% else %}
+                                <option value="{{ gr.id }}" selected>{{ gr.name }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="btn-box text-end">
+                    <a href="#" class="btn w-30 btn-secondary">
+                        Отменить
+                    </a>
+                    <input type="submit" href="#" class="btn w-40 btn-primary" value="Сохранить">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<!-- Form -->
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends 'admin/base_template.html' %}
+{% load static %}
+{% load get_item %}
+
+{% block title %} Сообщения {% endblock %}
+
+
+{% block page_title %} Сообщения {% endblock %}
+
+
+{% block nav_ol %}
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'home' %}">Главная</a></li>
+    <li class="breadcrumb-item ">
+        <a href="{% url 'messages_list' %}">Сообщения</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="&quot;page&quot;">
+        Информация
+    </li>
+</ol>
+{% endblock %}
+
+{% block content_width %} class="col-12" {% endblock %}
+
+
+{% block content %}
+<div class="row">
+    {% csrf_token %}
+    {{ some_error }}
+    <div class="col-12 col-xl-8">
+        <div class="card mt-3">
+            <div class="card-bodyb p-5">
+                <div class="form-group">
+                    <!-- Label  -->
+                    <label class="form-label">
+                        Message id
+                    </label>
+                    <br>
+                    <!-- Input -->
+                    <input type="text" value="{{ object.message_id }}" class="form-control" disabled>
+                </div>
+                <div class="form-group">
+                    <!-- Label  -->
+                    <label class="form-label">
+                        User
+                    </label>
+                    <br>
+                    <!-- Input -->
+                    <input type="text" value="{{ object.user }}" class="form-control" disabled>
+                </div>
+                <div class="form-group">
+                    <!-- Label  -->
+                    <label class="form-label">
+                        Date
+                    </label>
+                    <br>
+                    <!-- Input -->
+                    <input type="text" value="{{ object.message_id }}" class="form-control" disabled>
+                </div><div class="form-group">
+                    <!-- Label  -->
+                    <label class="form-label">
+                        Text
+                    </label>
+                    <br>
+                    <!-- Input -->
+                    <textarea class="editor" placeholder="Text">{{ object.text }}</textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Form -->
+{% endblock %}
