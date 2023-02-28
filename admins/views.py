@@ -47,7 +47,7 @@ class MessagesList(BasedListView):
 
 
             queryset = list_to_queryset(list(end_list))
-        print(quote_groups)
+            print(quote_groups)
     
         return queryset
 
