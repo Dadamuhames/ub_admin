@@ -170,7 +170,7 @@ def delete_item(request):
     return redirect(url)
 
 
-# translations list
+"""# translations list
 class TranslationList(ListView):
     model = Translations
     template_name = 'admin/translation_list.html'
@@ -389,3 +389,4 @@ class TranslationGroupUdpate(UpdateView):
                 return render(request, template_name=self.template_name, context={'key_errors': {str(i): 'Key is alredy in use'}, 'new_objects': objects, 'langs': langs, 'len': items_count})
 
         return redirect('transl_group_detail', pk=self.get_object().id)
+"""
