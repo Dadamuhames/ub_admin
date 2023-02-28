@@ -34,17 +34,19 @@ class MessagesList(BasedListView):
         queryset = Messages.objects.all()
         end_list = set()
         quote_groups_ids = self.request.GET.getlist('quotes')
-        quote_groups = SearchQuoteGroup.objects.filter(id__in=[int(it) for it in quote_groups_ids])
+        
+        if quote_groups_ids:
+            quote_groups = SearchQuoteGroup.objects.filter(id__in=[int(it) for it in quote_groups_ids])
 
-        for gr in quote_groups:
-            quotes = gr.quotes.all()
-            for q in quotes:
-                q_set = queryset.filter(text__iregex=q.quote)
-                for item in q_set:
-                    end_list.add(item)
+            for gr in quote_groups:
+                quotes = gr.quotes.all()
+                for q in quotes:
+                    q_set = queryset.filter(text__iregex=q.quote)
+                    for item in q_set:
+                        end_list.add(item)
 
 
-        queryset = list_to_queryset(list(end_list))
+            queryset = list_to_queryset(list(end_list))
         print(quote_groups)
     
         return queryset
