@@ -126,7 +126,7 @@
         </ul>
 
         <!-- Pagination -->
-        <ul class="pagination pagination-tabs card-pagination">
+        <ul class="pagination pagination-tabs card-pagination" style="overflow-x: auto;">
             {% for i in page_obj.paginator.page_range %}
             {% if i == page_obj.number %}
             <li class="active"><a class="page" href="{{ url }}page={{ i }}" data-i="1" data-page="10">{{ i }}</a></li>
