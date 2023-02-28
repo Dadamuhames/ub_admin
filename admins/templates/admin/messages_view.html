@@ -69,5 +69,12 @@
         </div>
     </div>
 </div>
+
+
+<script>
+    for (let txt of document.querySelectorAll('.editor')) {
+        CKEDITOR.replace(txt)
+    }
+</script>
 <!-- Form -->
 {% endblock %}
