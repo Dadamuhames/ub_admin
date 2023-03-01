@@ -77,6 +77,8 @@ class MessagesList(BasedListView):
 
         context['user_count'] = len(list(users_set))
         context['quotes'] = SearchQuoteGroup.objects.all()
+        context['selected_quotes'] = [int(item) for item in self.request.GET.getlist('quotes', [])]
+        print(context['selected_quotes'])
         url = self.request.path + "?"
 
         if '&' in self.request.get_full_path():
