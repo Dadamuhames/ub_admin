@@ -37,7 +37,11 @@
                     </label>
                     <select name="quotes" class="form-select" id="" multiple data-choices="">
                         {% for q in quotes %}
-                        <option value="{{ q.id }}">{{ q.name }}</option>
+                        {% if q in request.GET %}
+                            <option value="{{ q.id }}" selected>{{ q.name }}</option>
+                        {% else %}
+                            <option value="{{ q.id }}">{{ q.name }}</option>
+                        {% endif %}
                         {% endfor %}
                     </select>
                 </div>
