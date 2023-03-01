@@ -31,7 +31,7 @@ class MessagesList(BasedListView):
     template_name = 'admin/messages_list.html'
 
     def get_queryset(self):
-        queryset = Messages.objects.all()
+        queryset = Messages.objects.all().order_by("-id")
         end_list = set()
         quote_groups_ids = self.request.GET.getlist('quotes')
         
