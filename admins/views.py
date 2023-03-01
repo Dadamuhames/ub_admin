@@ -50,7 +50,7 @@ class MessagesList(BasedListView):
 
         
         if quote_groups_ids:
-            quote_groups = SearchQuoteGroup.objects.filter(id__in=[int(it) for it in quote_groups_ids])
+            quote_groups = SearchQuoteGroup.objects.filter(id__in=[int(it) for it in quote_groups_ids if it != '0'])
 
             for gr in quote_groups:
                 quotes = gr.quotes.all()
