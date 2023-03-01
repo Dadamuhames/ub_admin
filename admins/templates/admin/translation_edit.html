@@ -27,7 +27,7 @@
     data-list='{"valueNames": ["item-name", "item-title", "item-email", "item-phone", "item-score", "item-company"]}'
     id="contactsList">
     {% csrf_token %}
-    <input type="hidden" name="item_count" {% if len %} value="{{ len }}" {% else %} value="{{ object.translations.count }}" {% endif %}>
+    <input type="hidden" name="item_count" {% if len %} value="{{ len }}" {% else %} value="{{ object.quotes.count }}" {% endif %}>
     <div class="card-header" style="padding-top: 15px; box-sizing: content-box; padding-bottom: 15px;">
         <div class="btns d-flex justify-content-end">
             <a href="" class="btn btn-danger me-3">Отмена</a>
