@@ -24,7 +24,7 @@ $('#add_new_group_form').on("submit", (e) => {
             $('#group_links').html(
                 $('#group_links').html() + 
                 `
-                    <a href="/admin/translations/${ data.id }" class="btn btn-info me-3 bg-transparent text-info group-link">${ data.name }</a>
+                    <a href="/admins/quotes/${ data.id }" class="btn btn-info me-3 bg-transparent text-info group-link">${ data.name }</a>
                 `
             )
 
