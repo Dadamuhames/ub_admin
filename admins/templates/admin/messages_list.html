@@ -36,7 +36,7 @@
                         Quotes
                     </label>
                     <select name="quotes" class="form-select" id="" multiple data-choices="">
-                        {% for q in quotes %}
+                        {% for q.id in quotes %}
                         {% if q in request.GET.getelist.quotes %}
                             <option value="{{ q.id }}" selected>{{ q.name }}</option>
                         {% else %}
