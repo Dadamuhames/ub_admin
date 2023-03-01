@@ -81,7 +81,7 @@ class MessagesList(BasedListView):
 
         if '&' in self.request.get_full_path():
             if 'page' in str(self.request.get_full_path()):
-                url = self.request.get_full_path().split('&')[:-1] + '&'
+                url = '&'.join(self.request.get_full_path().split('&')[:-1]) + '&'
             else:
                 url = self.request.get_full_path() + '&'
 
