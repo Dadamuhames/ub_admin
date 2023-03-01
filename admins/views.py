@@ -5,6 +5,7 @@ from .utils import *
 from rest_framework import generics
 from rest_framework.response import Response
 from .serializers import MessagesSerializer
+from datetime import datetime
 # Create your views here.
 
 
@@ -34,6 +35,17 @@ class MessagesList(BasedListView):
         queryset = Messages.objects.all().order_by("-id")
         end_list = set()
         quote_groups_ids = self.request.GET.getlist('quotes')
+        date = self.request.GET.get('date', '')
+
+        if date != '':
+            if 'to' in str(date):
+                from_date = datetime.strptime(date.split(" to ")[0], '%Y-%m-%d')
+                to_date = datetime.strptime(date.split(' to ')[-1], '%Y-%m-%d')
+                queryset = queryset.filter(date__range=[from_date, to_date])
+            else:
+                from_date = datetime.strptime(date, '%Y-%m-%d')
+                queryset = queryset.filter(date__range=[from_date, datetime.today()])
+
         
         if quote_groups_ids:
             quote_groups = SearchQuoteGroup.objects.filter(id__in=[int(it) for it in quote_groups_ids])
