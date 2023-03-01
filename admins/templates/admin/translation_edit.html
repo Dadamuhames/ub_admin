@@ -1,0 +1,112 @@
+{% extends 'admin/base_template.html' %}
+{% load static %}
+{% load get_item %}
+{% load range %}
+
+{% block title %} Новый язык {% endblock %}
+
+
+{% block page_title %} Переводы {% endblock %}
+
+{% block nav_ol %}
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'home' %}">Главная</a></li>
+    <li class="breadcrumb-item active" aria-current="&quot;page&quot;">
+        Переводы
+    </li>
+</ol>
+{% endblock %}
+
+{% block content_width %} class="col-12" {% endblock %}
+
+
+{% block content %}
+<!-- Tab content -->
+<!-- Card -->
+<form method="post" class="card"
+    data-list='{"valueNames": ["item-name", "item-title", "item-email", "item-phone", "item-score", "item-company"]}'
+    id="contactsList">
+    {% csrf_token %}
+    <input type="hidden" name="item_count" {% if len %} value="{{ len }}" {% else %} value="{{ object.translations.count }}" {% endif %}>
+    <div class="card-header" style="padding-top: 15px; box-sizing: content-box; padding-bottom: 15px;">
+        <div class="btns d-flex justify-content-end">
+            <a href="" class="btn btn-danger me-3">Отмена</a>
+            <button type="submit" class="btn btn-success">Сохранить</button>
+        </div>
+    </div>
+    <div class="table-responsive" style="padding: 20px;">
+        <table class="table table-sm table-hover table-nowrap card-table">
+            <thead>
+                <tr>
+                    <th style="width:30px;">
+                        <a class="list-sort text-muted">#</a>
+                    </th>
+                    <th style="width:80px;">
+                        <span class="list-sort text-muted">Название</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="list fs-base" id="translations-list">
+                {% for item, i in objects.pairs %}
+                <tr>
+                    <td>
+                        <span class="item-title translation-id">{{ i }}</span>
+                    </td>
+                    <td>
+                        <div class="input-group input-group-merge input-group-reverse">
+                            <input  class="form-control" name='quote[{{ i }}]' placeholder="Ключ..." type="text" aria-label="Input group reverse"
+                                aria-describedby="inputGroupReverse" value="{{ item.quote }}">
+                            <div class="input-group-text" id="inputGroupReverse">
+                                <span class="item-title" id="group-key-name">{{ item.group.name }}.</span>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <button id="add_item" type="button" class="btn btn-info w-100 my-4">Добавить еще</button>
+    </div>
+</form>
+<!-- / .main-content -->
+<table class="d-none">
+    <tbody id="for_new_items">
+        <tr>
+            <td>
+                <span class="item-title translation-id">
+                    {% if object %}
+                        {{ object.translations.count }}
+                    {% elif len %}
+                        {{ len }}
+                    {% endif %}
+                    </span>
+            </td>
+            <td>
+                <div class="input-group input-group-merge input-group-reverse">
+                    <input class="form-control translate-key-inp" name='quote' placeholder="Ключ..." type="text" aria-label="Input group reverse"
+                        aria-describedby="inputGroupReverse">
+                    <div class="input-group-text" id="inputGroupReverse">
+                        <span class="item-title" id="group-key-name">{{ object.sub_text }}.</span>
+                    </div>
+                </div>
+            </td>
+        </tr>        
+    </tbody>
+
+</table>
+<!-- JAVASCRIPT -->
+<script>
+    for(let item of document.querySelectorAll(".group-link")) {
+        if(item.href == window.location) {
+            item.classList.remove('bg-transparent')
+            item.classList.remove('text-info')
+        }
+    }
+
+</script>
+<!-- Map JS -->
+<script src="{% static 'assets/js/main.js' %}"></script>
+<script src="{% static 'assets/js/edit_translation.js' %}"></script>
+
+<!-- Vendor JS -->
+{% endblock %}

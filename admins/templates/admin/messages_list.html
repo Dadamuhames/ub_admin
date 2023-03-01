@@ -27,28 +27,31 @@
 <div class="card"
     data-list='{"valueNames": ["item-name", "item-title", "item-email", "item-phone", "item-score", "item-company"]}'
     id="contactsList">
-    <div class="card-header">
-        <div class="row align-items-center">
-            <div class="col">
-                <!-- Form -->
-                <form method="get">
-                    <div class="d-flex">
-                        <div class="input-group input-group-flush input-group-merge input-group-reverse"
-                            style="width: 200px;">
-                            
-                            <select name="quotes" class="form-select" id="" multiple data-choices="">
-                                {% for q in quotes %}
-                                    <option value="{{ q.id }}">{{ q.name }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                        <button class="btn btn-primary" type="submit">Искать</button>
-                    </div>
-
-                </form>
-
-            </div>
-        </div> <!-- / .row -->
+    <div class="row">
+        <div class="col justify-content-center">
+            <!-- Form -->
+            <form method="get" style="padding: 30px; width: 300px;">
+                <div class="form-group" style="width: 200px;">
+                    <label for="" class="form-label">
+                        Quotes
+                    </label>
+                    <select name="quotes" class="form-select" id="" multiple data-choices="">
+                        {% for q in quotes %}
+                        <option value="{{ q.id }}">{{ q.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="" class="form-label">
+                        Date
+                    </label>
+                    <input name="date" type="text" class="form-control" placeholder="Flatpickr range example"
+                        data-flatpickr='{"mode": "range"}'>
+                </div>
+                <button class="btn btn-primary" type="submit">Искать</button>
+            </form>
+    
+        </div>
     </div>
     <div class="table-responsive" style="padding: 20px;">
         <table class="table table-sm table-hover table-nowrap card-table">

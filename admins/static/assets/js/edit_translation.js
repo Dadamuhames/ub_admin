@@ -3,7 +3,7 @@ $(document).on('click', '#add_item', () => {
     console.log(new_id, $(".translation-id"))
     $('[name="item_count"]').val(new_id)
     $('#for_new_items').find('.translation-id').html(new_id)
-    $('#for_new_items').find('.translate-key-inp').attr('name', `key[${new_id}]`)
+    $('#for_new_items').find('.translate-key-inp').attr('name', `quote[${new_id}]`)
     $('#for_new_items').find('.lang-val').each((i, e) => {
         let lang = $(e).attr('data-lang')
         $(e).attr('name', `value[${new_id}][${lang}]`)
