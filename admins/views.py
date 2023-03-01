@@ -41,7 +41,9 @@ class MessagesList(BasedListView):
             if 'to' in str(date):
                 from_date = datetime.strptime(date.split(" to ")[0], '%Y-%m-%d')
                 to_date = datetime.strptime(date.split(' to ')[-1], '%Y-%m-%d')
-                queryset = queryset.filter(date__range=[from_date, to_date])
+                print(to_date, from_date)
+                queryset = queryset.filter(
+                    date__gte=from_date, date__lte=to_date)
             else:
                 from_date = datetime.strptime(date, '%Y-%m-%d')
                 queryset = queryset.filter(date__range=[from_date, datetime.today()])
@@ -83,77 +85,6 @@ class MessagesList(BasedListView):
 class MessagesDetail(DetailView):
     model = Messages
     template_name = 'admin/messages_view.html'
-
-
-
-# searches list
-class QuotesList(BasedListView):
-    queryset = SearchQuotes.objects.all()
-    template_name = 'admin/quotes.html'
-
-
-# quotes cteate
-class QuotesCreate(CreateView):
-    model = SearchQuotes
-    fields = '__all__'
-    success_url = '/admins/quotes'
-    template_name = 'admin/quotes_edit.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(QuotesCreate, self).get_context_data(**kwargs)
-        context['groups'] = SearchQuoteGroup.objects.all()
-
-        return context
-
-
-# quotes update view
-class QuotesUpdateView(UpdateView):
-    model = SearchQuotes
-    fields = '__all__'
-    template_name = '/admins/quotes'
-    success_url = 'admin/quotes_edit.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(QuotesUpdateView, self).get_context_data(**kwargs)
-        context['groups'] = SearchQuoteGroup.objects.all()
-
-        return context
-
-
-# searches group list
-class QuotesGroupList(BasedListView):
-    models = SearchQuoteGroup
-    queryset = SearchQuoteGroup.objects.all()
-    template_name = 'admin/quote_groups.html'
-
-
-# quote group create
-class QuoteGroupCreate(CreateView):
-    model = SearchQuoteGroup
-    fields = '__all__'
-    template_name = 'admin/quote_gr_form.html'
-    success_url = '/admins/quotes_group'
-
-
-    def form_valid(self, form):
-        return None
-
-
-    def post(self, request, *args, **kwargs):
-        context = super().post(request, *args, **kwargs)
-        name = request.POST.get("name")
-        quotes = request.POST.get("quotes")
-
-        return 
-
-
-
-# quote group edit
-class QuoteGroupEdit(UpdateView):
-    model = SearchQuoteGroup
-    fields = '__all__'
-    template_name = 'admin/quote_gr_form.html'
-    success_url = '/admins/quotes_group'
 
 
 # messages create
