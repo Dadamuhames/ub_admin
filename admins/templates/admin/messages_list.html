@@ -28,7 +28,7 @@
     data-list='{"valueNames": ["item-name", "item-title", "item-email", "item-phone", "item-score", "item-company"]}'
     id="contactsList">
     <div class="row">
-        <div class="col justify-content-center">
+        <div class="col-6 justify-content-center">
             <!-- Form -->
             <form method="get" style="padding: 30px; width: 300px;">
                 <div class="form-group" style="width: 200px;">
@@ -50,7 +50,10 @@
                 </div>
                 <button class="btn btn-primary" type="submit">Искать</button>
             </form>
-    
+        </div>
+        <div class="col-6" style="padding-top: 50px;">
+            <p><b>Результаты:</b> {{ objecs_count }}</p>
+            <p><b>Пользователи:</b> {{ user_count }}</p>
         </div>
     </div>
     <div class="table-responsive" style="padding: 20px;">

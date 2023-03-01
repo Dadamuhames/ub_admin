@@ -77,6 +77,15 @@ class MessagesList(BasedListView):
 
         context['user_count'] = len(list(users_set))
         context['quotes'] = SearchQuoteGroup.objects.all()
+        url = self.request.path
+
+        if '&' in self.request.get_full_path():
+            if 'page' in str(self.request.get_full_path()):
+                url = self.request.get_full_path().split('&')[:-1]
+            else:
+                url = self.request.get_full_path()
+
+        context['url'] = url
 
         return context
 
