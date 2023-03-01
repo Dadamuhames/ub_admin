@@ -32,7 +32,7 @@ class MessagesList(BasedListView):
     template_name = 'admin/messages_list.html'
 
     def get_queryset(self):
-        queryset = Messages.objects.all().order_by("-id")
+        queryset = Messages.objects.all().order_by("-date")
         end_list = set()
         quote_groups_ids = self.request.GET.getlist('quotes')
         date = self.request.GET.get('date', '')
